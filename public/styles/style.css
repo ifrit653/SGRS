@@ -1,0 +1,15 @@
+:root{
+    --offcanva-width: 270px; 
+}
+
+
+.sidebar-nav { 
+    width: 270px;
+}
+
+@media (min-width: 992px) {
+    .sidebar-nav {
+        transform: none;
+        visibility: visible !important;
+    }
+}
