@@ -1,15 +1,24 @@
-:root{
-    --offcanva-width: 270px; 
+/* Setting the width of the sidebar to 270px and setting the height of the sidebar to the height of the
+window minus the height of the top nav bar. */
+:root {
+  --offcanva-width: 270px;
+  --topNavBarHeight: 56px;
 }
 
+.sidebar-nav {
+  width: 270px;
+}
 
-.sidebar-nav { 
-    width: 270px;
+.exmple {
+  width: 50;
+  height: 54;
 }
 
 @media (min-width: 992px) {
-    .sidebar-nav {
-        transform: none;
-        visibility: visible !important;
-    }
+  .sidebar-nav {
+    transform: none;
+    visibility: visible !important;
+    top: var(--topNavBarHeight);
+    height: calc(100% - var(--topNavBarHeight));
+  }
 }
