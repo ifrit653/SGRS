@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ComplaintRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ComplaintRepository::class)]
@@ -28,6 +29,15 @@ class Complaint
     #[ORM\ManyToOne(targetEntity: category::class, inversedBy: 'complaints')]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
+
+    /**
+     *constructor
+     */
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
