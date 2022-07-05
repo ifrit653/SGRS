@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Complaint
+{% endblock %}
+
+{% block body %}
+	{% if not complaints.items is same as ([]) %}
+
+
+		<h1 class="mt-4">All complaints</h1>
+		<div class="count mt-4">
+			Number of pages:
+			{{ complaints.getTotalItemCount }}
+		</div>
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+		<table class="table mt-4">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Category</th>
+					<th scope="col">Problem</th>
+					<th scope="col">Status</th>
+					<th scope="col">Submited at</th>
+					<th scope="col">Updated at</th>
+					<th scope="col" colspan="2">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for complaint in complaints %}
+					<tr>
+						<th scope="row">{{ complaint.id }}</th>
+						<td>{{ complaint.category }}</td>
+						<td class="text-truncate" style="max-width: 150px">{{ complaint.problem }}</td>
+						<td>{{ complaint.status }}</td>
+						<td>{{ complaint.createdAt|date("m/d/Y") }}</td>
+						<td>{{ complaint.UpdatedAt|date("m/d/Y")}}</td>
+						<td>
+							<a href="{{ path('complaint.edit', {id: complaint.id}) }}" class="btn btn-info">edit</a>
+						</td>
+						<td>
+							<a href="{{ path('complaint.delete', {id: complaint.id}) }}" class="btn btn-warning">delete</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="navigation d-flex justify-content-center mt-4">
+			{{ knp_pagination_render(complaints) }}
+		</div>
+	{% else %}
+		<h1>No Complaints found</h1>
+	{% endif %}
+{% endblock %}

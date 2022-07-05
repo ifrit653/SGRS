@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\ComplaintRepository;
-use DateTimeImmutable;
+
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ComplaintRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Complaint
 {
     #[ORM\Id]
@@ -15,6 +18,7 @@ class Complaint
     private $id;
 
     #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank()]
     private $problem;
 
     #[ORM\Column(type: 'string', length: 20)]
@@ -26,7 +30,7 @@ class Complaint
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private $updatedAt;
 
-    #[ORM\ManyToOne(targetEntity: category::class, inversedBy: 'complaints')]
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'complaints')]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 
@@ -37,6 +41,12 @@ class Complaint
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -92,6 +102,11 @@ class Complaint
         return $this;
     }
 
+    /**
+     * This function returns the category of the product
+     * 
+     * @return ?category The category of the product.
+     */
     public function getCategory(): ?category
     {
         return $this->category;
