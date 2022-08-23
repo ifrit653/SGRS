@@ -32,6 +32,12 @@ class ComplaintController extends AbstractController
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
+
+        if (!$complaints) {
+            throw $this->createNotFoundException(
+                'No complaint found found for id'
+            );
+        }
         return $this->render('pages/complaint/index.html.twig', [
             'complaints' => $complaints,
 

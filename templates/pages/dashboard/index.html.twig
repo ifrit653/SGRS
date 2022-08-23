@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home - dashboard {% endblock %}
+{% block title %}Home - dashboard
+{% endblock %}
 
 {% block body %}
-
+	<h1 style=" color: blue ">Hello
+		{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+			user
+		{% else %}
+			{{app.user.lastname}}
+		{% endif %}
+	</h1>
 {% endblock %}
