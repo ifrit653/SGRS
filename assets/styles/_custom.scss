@@ -1,0 +1,24 @@
+:root {
+  --bg-color-1: #101827;
+  --bg-color-2: rgba(21, 30, 47, 1);
+  --white-color: #fff;
+  --black-color: #000;
+  --text-color: #969593;
+}
+* {
+  transition: 0.25s ease;
+}
+body {
+  position: relative;
+  color: #fff;
+}
+main {
+  width: 75vw;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  background: var(--bg-color-1);
+}
+table {
+  width: 100%;
+}

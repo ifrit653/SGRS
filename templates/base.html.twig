@@ -20,19 +20,14 @@
 		{% endblock %}
 	</head>
 	<body>
-		<div class="container-fluid">
-			<div class="row flex-nowrap">
-				{% block navigation %}
-					{{ include('partials/_navigation.html.twig') }}
 
-				{% endblock %}
-
-				<div class="col py-3 bg-light"> {% block body %}{% endblock %}
-					{# Content area... #}
-					</div>
-				</div>
-			</div>
+		{% block navigation %}
+			{{ include('partials/_navigation.html.twig') }}
+		{% endblock %}
+		<main>
+			{% block body %}{% endblock %}
+		</main>
 
 
-		</body>
-	</html>
+	</body>
+</html>

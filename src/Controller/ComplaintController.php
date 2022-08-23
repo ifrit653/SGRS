@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Complaint;
 use App\Form\ComplaintType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;

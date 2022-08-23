@@ -17,6 +17,8 @@ class ComplaintFixtures extends Fixture implements DependentFixtureInterface
             $complaint->setStatus('pending');
             $complaint->setCategory($this->getReference('category' . $i));
             $manager->persist($complaint);
+
+            $this->addReference('complaint' . $i, $complaint);
         }
         $manager->flush();
     }

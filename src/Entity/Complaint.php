@@ -34,6 +34,9 @@ class Complaint
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 
+    #[ORM\OneToOne(mappedBy: 'complaint', targetEntity: Answer::class, cascade: ['persist', 'remove'])]
+    private $answer;
+
     /**
      *constructor
      */
@@ -43,7 +46,7 @@ class Complaint
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
     }
-
+    #[ORM\PrePersist]
     public function setUpdatedAtValue()
     {
         $this->updatedAt = new \DateTimeImmutable();
@@ -115,6 +118,28 @@ class Complaint
     public function setCategory(?category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getAnswer(): ?Answer
+    {
+        return $this->answer;
+    }
+
+    public function setAnswer(?Answer $answer): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($answer === null && $this->answer !== null) {
+            $this->answer->setComplaint(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($answer !== null && $answer->getComplaint() !== $this) {
+            $answer->setComplaint($this);
+        }
+
+        $this->answer = $answer;
 
         return $this;
     }
