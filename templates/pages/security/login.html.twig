@@ -6,10 +6,16 @@
 {% block body %}
 	<div class="container">
 		<h1>LOGIN FORM</h1>
+		{% if error %}
+			<div class="alert alert-danger" role="alert">
+				{{ error.messageKey|trans(error.messageData, 'security') }}
+			</div>
+
+		{% endif %}
 		<form method="POST">
 			<div class="mb-3">
 				<label for="email" class="form-label">Email address</label>
-				<input type="email" placeholder="exemple@email.com" class="form-control" id="email" name="_username">
+				<input type="email" placeholder="exemple@email.com" class="form-control" id="email" name="_username" value="{{ last_username }}">
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Password</label>
