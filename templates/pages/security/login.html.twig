@@ -1,49 +1,73 @@
-
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device.width, intial-scale=1">
-		<title>
-			{% block title %}SGRS - Login
-{% endblock %}
-		</title>
-		<link
-		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
-			<link rel="stylesheet" href="/styles/style.css">
-		{% endblock %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device.width, intial-scale=1" />
+    <title>{% block title %}SGRS - Login {% endblock %}</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"
+    />
+    {# Run `composer require symfony/webpack-encore-bundle` to start using
+    Symfony UX #} {% block stylesheets %}
+    {{
+      encore_entry_link_tags("app")
+    }}
+    <link rel="stylesheet" href="/styles/style.css" />
+    {% endblock %} {% block javascripts %}
+    {{
+      encore_entry_script_tags("app")
+    }}
+    {% endblock %}
+  </head>
+  <body>
+    {% block body %}
+    <div class="container-fluid login__blk">
+      <div class="row">
+        <div class="col login__blk-illustration">
+          <img
+            src="{{ asset('images/3d_objects.png') }}"
+            alt="illustration-login"
+            class="img-fluid"
+          />
+        </div>
+        <div class="col align-items-center login__blk-form">
+          <div>
+            <h1>LOGIN FORM</h1>
+            {% if error %}
+            <div class="alert alert-danger" role="alert">
+              {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
 
-		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
-		{% endblock %}
-	</head>
-	<body>
-
-
-{% block body %}
-	<div class="container">
-		<h1>LOGIN FORM</h1>
-		{% if error %}
-			<div class="alert alert-danger" role="alert">
-				{{ error.messageKey|trans(error.messageData, 'security') }}
-			</div>
-
-		{% endif %}
-		<form method="POST">
-			<div class="mb-3">
-				<label for="email" class="form-label">Email address</label>
-				<input type="email" placeholder="exemple@email.com" class="form-control" id="email" name="_username" value="{{ last_username }}">
-			</div>
-			<div class="mb-3">
-				<label for="password" class="form-label">Password</label>
-				<input type="password" class="form-control" name="_password" id="password" placeholder="password">
-			</div>
-			<button type="submit" class="btn btn-primary">Login</button>
-		</form>
-	</div>
-{% endblock %}
-	</body>
+            {% endif %}
+            <form method="POST">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input
+                  type="email"
+                  placeholder="exemple@email.com"
+                  class="form-control"
+                  id="email"
+                  name="_username"
+                  value="{{ last_username }}"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="_password"
+                  id="password"
+                  placeholder="password"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </body>
 </html>

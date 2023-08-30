@@ -5,7 +5,9 @@ const Encore = require('@symfony/webpack-encore');
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
-
+module.exports = {
+    mode: 'development',
+  };
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
@@ -31,7 +33,6 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
-    .enableSassLoader()
 
     /*
      * FEATURE CONFIG
@@ -57,8 +58,12 @@ Encore
     })
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
-
+    .enableSassLoader()
+    .copyFiles({
+        from: './assets/images',
+        to: 'images/[path][name].[hash:8].[ext]',
+        pattern: /\.(png|jpg|jpeg)$/
+    })
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
@@ -73,4 +78,3 @@ Encore
     //.autoProvidejQuery()
 ;
 
-module.exports = Encore.getWebpackConfig();
